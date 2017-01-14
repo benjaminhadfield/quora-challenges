@@ -9,8 +9,6 @@ a b
 i i i i ... (a times)
 """
 
-import re
-
 
 class Upvotes:
     def __init__(self, n, k, data):
