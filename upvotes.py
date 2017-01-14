@@ -9,6 +9,8 @@ a b
 i i i i ... (a times)
 """
 
+import __future__
+
 
 class Upvotes:
     def __init__(self, n, k, data):
@@ -27,7 +29,7 @@ class Upvotes:
         result = []
         offset = 0
 
-        for i in range (self.n - self.k + 1):
+        for i in range(self.n - self.k + 1):
             window = self.data[offset:offset + self.k]
             count_non_decreasing = self.count_non_decreasing(window)
             count_non_increasing = self.count_non_increasing(window)
