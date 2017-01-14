@@ -5,11 +5,57 @@ Quora Challenge: Upvotes
 Ben Hadfield, benjohnhadfield@gmail.com || benjamin.hadfield.14@ucl.ac.uk
 """
 
+import re
+
+
+class Parser:
+    def get_n(self, line):
+        n = re.search('^\d+', line)
+        return int(n.group())
+
+    def get_k(self, line):
+        k = re.search('\d+$', line)
+        return int(k.group())
+
+    def get_upvotes(self, line):
+        upvotes = line.split(' ')
+        return [int(upvote) for upvote in upvotes]  # convert to int and return
+
 
 class Upvotes:
-    def __init__(self, n, k):
+    def __init__(self, n, k, data):
+        if n < k or n is not len(data):
+            raise AttributeError('Check the input to Upvotes.')
+
         self.n = n
         self.k = k
+        self.data = data
+
+    def count(self):
+        """
+        Takes the list of upvote data and returns a list of integers corresponding to the number of non-decreasing
+        subranges within the window minus the number of non-increasing subranges within each window.
+        """
+        result = []
+        offset = 0
+
+        for i in range (self.n - self.k + 1):
+            window = self.data[offset:offset + self.k]
+            count_non_decreasing = self.count_non_decreasing(window)
+            count_non_increasing = self.count_non_increasing(window)
+            result.append(count_non_decreasing - count_non_increasing)
+
+            offset += 1
+
+        return result
+
+    def print_count(self):
+        """
+        Performs self.count but prints the output to sdout, with each result on a new line.
+        """
+        result = self.count()
+        for r in result:
+            print(r)
 
     def count_non_decreasing(self, window):
         """Takes a window of numbers and returns the number of non-decreasing sub-ranges."""
@@ -62,4 +108,16 @@ class Upvotes:
         return True
 
 
-print(Upvotes(5, 3).count_non_increasing([8, 4, 5]))
+# Get input lines
+first_line = input()
+second_line = input()
+
+# Parse those lines to get the values we're interested
+parser = Parser()
+n = parser.get_n(first_line)
+k = parser.get_k(first_line)
+upvotes = parser.get_upvotes(second_line)
+
+# Get the result
+upvotes = Upvotes(n, k, upvotes)
+upvotes.print_count()
