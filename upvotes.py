@@ -3,23 +3,13 @@ Python 3.5
 Quora Challenge: Upvotes
 
 Ben Hadfield, benjohnhadfield@gmail.com || benjamin.hadfield.14@ucl.ac.uk
+
+Expected input
+a b
+i i i i ... (a times)
 """
 
 import re
-
-
-class Parser:
-    def get_n(self, line):
-        n = re.search('^\d+', line)
-        return int(n.group())
-
-    def get_k(self, line):
-        k = re.search('\d+$', line)
-        return int(k.group())
-
-    def get_upvotes(self, line):
-        upvotes = line.split(' ')
-        return [int(upvote) for upvote in upvotes]  # convert to int and return
 
 
 class Upvotes:
@@ -109,14 +99,8 @@ class Upvotes:
 
 
 # Get input lines
-first_line = input()
-second_line = input()
-
-# Parse those lines to get the values we're interested
-parser = Parser()
-n = parser.get_n(first_line)
-k = parser.get_k(first_line)
-upvotes = parser.get_upvotes(second_line)
+n, k = [int(i) for i in input().strip().split(' ')]
+upvotes = input().strip().split(' ')
 
 # Get the result
 upvotes = Upvotes(n, k, upvotes)
