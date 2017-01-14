@@ -6,4 +6,4 @@ My solutions to some of the [Quora Programming Challenges](https://www.quora.com
 Challenges
 ----------
 
-- [x] [Upvotes](https://github.com/benjaminhadfield/quora-challenges/upvotes.py)
+- [x] [Upvotes](https://github.com/benjaminhadfield/quora-challenges/master/upvotes.py)
